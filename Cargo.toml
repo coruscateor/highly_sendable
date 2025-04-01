@@ -2,6 +2,7 @@
 name = "highly_sendable"
 version = "0.1.0"
 edition = "2024"
+license = "MIT OR Apache-2.0"
 description = "Containers for sending Strings and results within your process and beyond."
 repository = "https://github.com/coruscateor/highly_sendable"
 homepage = "https://coruscateor.com/projects/highly-sendable"
