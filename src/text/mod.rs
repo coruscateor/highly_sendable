@@ -4,7 +4,6 @@
 
 mod sendable_text;
 
-#[cfg(feature = "corlib")]
 pub use sendable_text::*;
 
 #[cfg(feature = "corlib")]

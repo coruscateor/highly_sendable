@@ -65,14 +65,14 @@ impl<T> WorkInProgressResult<T>
 
     }
 
-    pub fn done_none() -> Self
+    pub fn none_done() -> Self
     {
 
         Self::new(None, true)
 
     }
 
-    pub fn not_done_none() -> Self
+    pub fn none_not_done() -> Self
     {
 
         Self::new(None, false)
@@ -277,14 +277,14 @@ impl<ID, T> IdedWorkInProgressResult<ID, T>
 
     }
 
-    pub fn done_none(id: ID) -> Self
+    pub fn none_done(id: ID) -> Self
     {
 
         Self::new(id, None, true)
 
     }
 
-    pub fn not_done_none(id: ID) -> Self
+    pub fn none_not_done(id: ID) -> Self
     {
 
         Self::new(id, None, false)
@@ -317,8 +317,7 @@ impl<ID, T> IdedWorkInProgressResult<ID, T>
 }
 
 impl<ID, T> Display for IdedWorkInProgressResult<ID, T>
-    where ID: Display,
-          T: Display
+    where ID: Display, T: Display
 {
 
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result
@@ -347,8 +346,7 @@ impl<ID, T> Display for IdedWorkInProgressResult<ID, T>
 }
 
 impl<ID, T> Debug for IdedWorkInProgressResult<ID, T>
-    where ID: Debug,
-          T: Debug
+    where ID: Debug, T: Debug
 {
 
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
