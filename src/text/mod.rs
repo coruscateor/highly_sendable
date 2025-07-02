@@ -6,6 +6,10 @@ mod sendable_text;
 
 pub use sendable_text::*;
 
+mod sendable_text_immut;
+
+pub use sendable_text_immut::*;
+
 #[cfg(feature = "corlib")]
 mod sendable_text_log;
 

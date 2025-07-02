@@ -79,7 +79,7 @@ impl<T> WorkInProgressResult<T>
 
     }
 
-    pub fn result(&self) -> &Option<T>
+    pub fn result_ref(&self) -> &Option<T>
     {
 
         &self.result
@@ -137,6 +137,26 @@ impl<T> Debug for WorkInProgressResult<T>
 
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct("WorkInProgressResult").field("result", &self.result).field("done", &self.done).finish()
+    }
+
+}
+
+impl<T> Clone for WorkInProgressResult<T>
+    where T: Clone
+{
+
+    fn clone(&self) -> Self {
+        Self { result: self.result.clone(), done: self.done.clone() }
+    }
+
+}
+
+impl<T> Default for WorkInProgressResult<T>
+    where T: Default
+{
+
+    fn default() -> Self {
+        Self { result: Default::default(), done: Default::default() }
     }
 
 }
@@ -304,7 +324,7 @@ impl<ID, T> IdedWorkInProgressResult<ID, T>
         to self.work_in_progress_result
         {
 
-            pub fn result(&self) -> &Option<T>;
+            pub fn result_ref(&self) -> &Option<T>;
 
             pub fn is_done(&self) -> bool;
 
@@ -355,4 +375,23 @@ impl<ID, T> Debug for IdedWorkInProgressResult<ID, T>
 
 }
 
+impl<ID, T> Clone for IdedWorkInProgressResult<ID, T>
+    where ID: Clone, T: Clone
+{
+
+    fn clone(&self) -> Self {
+        Self { id: self.id.clone(), work_in_progress_result: self.work_in_progress_result.clone() }
+    }
+
+}
+
+impl<ID, T> Default for IdedWorkInProgressResult<ID, T>
+    where ID: Default, T: Default
+{
+
+    fn default() -> Self {
+        Self { id: Default::default(), work_in_progress_result: Default::default() }
+    }
+
+}
 
