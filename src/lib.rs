@@ -8,6 +8,8 @@
 
 pub mod text;
 
+/*
+
 mod work_in_progress_result;
 
 pub use work_in_progress_result::*;
@@ -15,6 +17,32 @@ pub use work_in_progress_result::*;
 mod work_in_progress_result_int_percentage;
 
 pub use work_in_progress_result_int_percentage::*;
+
+mod work_in_progress_option;
+
+pub use work_in_progress_option::*;
+
+mod  work_in_progress_option_int_percentage;
+
+pub use work_in_progress_option_int_percentage::*;
+
+ */
+
+mod work_in_progress;
+
+pub use work_in_progress::*;
+
+mod status_definitions;
+
+pub use status_definitions::*;
+
+mod connection_state_id;
+
+pub use connection_state_id::*;
+
+mod connection_message;
+
+pub use connection_message::*;
 
 /*
 pub fn add(left: u64, right: u64) -> u64 {
