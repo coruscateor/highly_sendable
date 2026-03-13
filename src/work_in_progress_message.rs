@@ -11,7 +11,7 @@ use std::fmt::Debug;
 use crate::EssentialStatus;
 
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-pub struct WorkInProgress<T, S = EssentialStatus, M = ()>
+pub struct WorkInProgressMessage<T, S = EssentialStatus, M = ()>
 {
 
     value: T,
@@ -20,7 +20,7 @@ pub struct WorkInProgress<T, S = EssentialStatus, M = ()>
 
 }
 
-impl<T, S, M> WorkInProgress<T, S, M>
+impl<T, S, M> WorkInProgressMessage<T, S, M>
 {
 
     pub fn new(value: T, status: S, meta_data: M) -> Self
@@ -73,7 +73,7 @@ impl<T, S, M> WorkInProgress<T, S, M>
 
 }
 
-impl<T, S, M> WorkInProgress<T, S, M>
+impl<T, S, M> WorkInProgressMessage<T, S, M>
     where M: Default
 {
 
@@ -93,7 +93,7 @@ impl<T, S, M> WorkInProgress<T, S, M>
 
 }
 
-impl<T, S, M> Clone for WorkInProgress<T, S, M>
+impl<T, S, M> Clone for WorkInProgressMessage<T, S, M>
     where T: Clone,
           S: Clone,
           M: Clone
@@ -114,7 +114,7 @@ impl<T, S, M> Clone for WorkInProgress<T, S, M>
 
 }
 
-impl<T, S, M> Default for WorkInProgress<T, S, M>
+impl<T, S, M> Default for WorkInProgressMessage<T, S, M>
     where T: Default,
           S: Default,
           M: Default
@@ -135,7 +135,7 @@ impl<T, S, M> Default for WorkInProgress<T, S, M>
 
 }
 
-impl<T, S, M> Debug for  WorkInProgress<T, S, M>
+impl<T, S, M> Debug for  WorkInProgressMessage<T, S, M>
     where T: Debug,
           S: Debug,
           M: Debug
@@ -144,7 +144,7 @@ impl<T, S, M> Debug for  WorkInProgress<T, S, M>
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result
     {
 
-        f.debug_struct("WorkInProgress").field("value", &self.value).field("status", &self.status).field("meta_data", &self.meta_data).finish()
+        f.debug_struct("WorkInProgressMessage").field("value", &self.value).field("status", &self.status).field("meta_data", &self.meta_data).finish()
 
     }
 

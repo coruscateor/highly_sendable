@@ -2,10 +2,6 @@
 
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 
-//Disabled - to be removed
-
-//pub mod result;
-
 pub mod text;
 
 /*
@@ -28,9 +24,9 @@ pub use work_in_progress_option_int_percentage::*;
 
  */
 
-mod work_in_progress;
+mod work_in_progress_message;
 
-pub use work_in_progress::*;
+pub use work_in_progress_message::*;
 
 mod status_definitions;
 
