@@ -10,6 +10,10 @@ use std::fmt::Debug;
 
 use crate::EssentialStatus;
 
+pub type WorkInProgressMessageOption<T, S = EssentialStatus, M = ()> = WorkInProgressMessage<Option<T>, S, M>;
+
+pub type WorkInProgressMessageResult<T, E = (), S = EssentialStatus, M = ()> = WorkInProgressMessage<Result<T, E>, S, M>; 
+
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct WorkInProgressMessage<T, S = EssentialStatus, M = ()>
 {
