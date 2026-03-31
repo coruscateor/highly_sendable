@@ -80,7 +80,7 @@ impl SendableText
 
     }
 
-    fn as_str(&self) -> &str
+    pub fn as_str(&self) -> &str
     {
        
         match self
