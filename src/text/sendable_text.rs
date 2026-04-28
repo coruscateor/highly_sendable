@@ -3,8 +3,6 @@ use std::{fmt::{Display, Formatter}, ops::Deref, sync::Arc};
 #[cfg(feature = "corlib")]
 use corlib::text::AsStr;
 
-use cfg_if::cfg_if;
-
 #[cfg(feature = "serde")]
 use serde::{de::{Error, Visitor}, Deserialize, Deserializer, Serialize, Serializer};
 
@@ -234,13 +232,12 @@ impl From<&Arc<str>> for SendableText
 
 }
 
-cfg_if!
+cfg_select!
 {
 
-    if #[cfg(feature = "serde")]
+    feature = "serde" => //serde =>
     {
-    
-        //#[cfg(feature = "serde")]
+        
         impl Serialize for SendableText
         {
 

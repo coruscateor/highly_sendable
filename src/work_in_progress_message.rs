@@ -8,14 +8,17 @@ use pastey::paste;
 
 use std::fmt::Debug;
 
-use crate::EssentialStatus;
+use crate::BasicStatus;
 
-pub type WorkInProgressMessageOption<T, S = EssentialStatus, M = ()> = WorkInProgressMessage<Option<T>, S, M>;
+pub type WorkInProgressMessageOption<T, S = BasicStatus, M = ()> = WorkInProgressMessage<Option<T>, S, M>;
 
-pub type WorkInProgressMessageResult<T, E = (), S = EssentialStatus, M = ()> = WorkInProgressMessage<Result<T, E>, S, M>; 
+pub type WorkInProgressMessageResult<T, E = (), S = BasicStatus, M = ()> = WorkInProgressMessage<Result<T, E>, S, M>; 
 
+///
+/// For reporting the progress of work being done and sending any values between threads, tasks or processes. 
+/// 
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-pub struct WorkInProgressMessage<T, S = EssentialStatus, M = ()>
+pub struct WorkInProgressMessage<T, S = BasicStatus, M = ()>
 {
 
     value: T,

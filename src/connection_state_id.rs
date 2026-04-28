@@ -6,9 +6,16 @@ use inc_dec::IntIncDecSelf;
 
 use pastey::paste;
 
+#[cfg(feature = "serde")]
+use serde::{Serialize, Deserialize};
+
 use crate::ConnectionMessage;
 
+///
+/// An id uniquely identifying the current connection state. Useful for filtering out irrelevant messages in pipelines that deal with networking.
+/// 
 #[derive(Default, PartialEq, Eq, PartialOrd, Ord, Clone, Copy, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct ConnectionStateId
 {
 
@@ -39,15 +46,6 @@ impl ConnectionStateId
        }
 
     }
-
-    /*
-    pub fn next_some(&mut self) -> Option<ConnectionStateId>
-    {
-
-        Some(self.next())
-
-    }
-    */
 
     pub fn connection_message<T>(&self, message: T) -> ConnectionMessage<T>
     {

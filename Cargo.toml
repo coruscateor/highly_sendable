@@ -1,20 +1,20 @@
 [package]
 name = "highly_sendable"
-version = "0.2.0-alpha"
+version = "0.2.0-beta"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 description = "Containers for sending Strings and results within your process and beyond."
 repository = "https://github.com/coruscateor/highly_sendable"
 homepage = "https://coruscateor.com/projects/highly-sendable"
 keywords = ["send", "result", "text", "string", "str"]
+rust-version = "1.95.0"
 
 [dependencies]
-delegate = "0.13.3"
-cfg-if = "1.0.0"
+delegate = "0.13.5"
 serde = { version = "1.0.228", features = ["derive"], optional = true }
 corlib = { version = "0.4.1", optional = true }
 accessorise = "0.2.0"
-pastey = "0.2.1"
+pastey = "0.2.2"
 inc_dec = "0.1.0"
 
 [package.metadata.docs.rs]

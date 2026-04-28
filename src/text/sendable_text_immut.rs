@@ -3,8 +3,6 @@ use std::{fmt::{Display, Formatter}, ops::Deref, sync::Arc};
 #[cfg(feature = "corlib")]
 use corlib::text::AsStr;
 
-use cfg_if::cfg_if;
-
 #[cfg(feature = "serde")]
 use serde::{de::{Error, Visitor}, Deserialize, Deserializer, Serialize, Serializer};
 
@@ -60,7 +58,6 @@ impl SendableTextImmut
             SendableTextImmut::Str(val) => Err(Self::Str(val)),
             SendableTextImmut::ArcStr(val) => Err(Self::ArcStr(val))
 
-
         }
 
     }
@@ -75,7 +72,6 @@ impl SendableTextImmut
             SendableTextImmut::ArcStr(val) => &val
             
         }
-
 
     }
 
@@ -216,10 +212,10 @@ impl From<&Arc<str>> for SendableTextImmut
 
 }
 
-cfg_if!
+cfg_select!
 {
 
-    if #[cfg(feature = "serde")]
+    feature = "serde" =>
     {
     
         //#[cfg(feature = "serde")]

@@ -26,9 +26,9 @@ dependencies = [
 
 [[package]]
 name = "delegate"
-version = "0.13.3"
+version = "0.13.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b9b6483c2bbed26f97861cf57651d4f2b731964a28cd2257f934a4b452480d21"
+checksum = "780eb241654bf097afb00fc5f054a09b687dad862e485fdcf8399bb056565370"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -37,10 +37,9 @@ dependencies = [
 
 [[package]]
 name = "highly_sendable"
-version = "0.2.0-alpha"
+version = "0.2.0-beta"
 dependencies = [
  "accessorise",
- "cfg-if",
  "corlib",
  "delegate",
  "inc_dec",
@@ -56,9 +55,9 @@ checksum = "1cec1f165fe69f11a3d078397ff15a2a4c281f1bfcade8ec4e40406a6b26ead1"
 
 [[package]]
 name = "pastey"
-version = "0.2.1"
+version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b867cad97c0791bbd3aaa6472142568c6c9e8f71937e98379f584cfb0cf35bec"
+checksum = "c5a797f0e07bdf071d15742978fc3128ec6c22891c31a3a931513263904c982a"
 
 [[package]]
 name = "proc-macro2"
