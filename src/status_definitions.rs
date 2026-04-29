@@ -1,4 +1,6 @@
 
+use std::fmt::Debug;
+
 #[cfg(feature = "serde")]
 use serde::{Serialize, Deserialize};
 
@@ -100,17 +102,18 @@ impl BasicStatus
 
 }
 
+pub type BasicStatusU32 = BasicStatusWithItem<u32>;
+
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-#[derive(Clone, Debug)]
-pub enum BasicStatusU32
+pub enum BasicStatusWithItem<T>
 {
 
-    InProgress(u32),
+    InProgress(T),
     Ended
 
 }
 
-impl BasicStatusU32
+impl<T> BasicStatusWithItem<T>
 {
 
     pub fn is_in_progress(&self) -> bool
@@ -120,13 +123,13 @@ impl BasicStatusU32
 
     }
 
-    pub fn in_progress_number(&self) -> Option<u32>
+    pub fn take_progress_item(self) -> Option<T>
     {
 
         if let Self::InProgress(val) = self
         {
 
-            Some(*val)
+            Some(val)
 
         }
         else
@@ -143,6 +146,62 @@ impl BasicStatusU32
 
         matches!(self, Self::Ended)
 
+    }
+
+}
+
+impl<T> Clone for BasicStatusWithItem<T>
+    where T: Clone
+{
+
+    fn clone(&self) -> Self
+    {
+
+        match self
+        {
+
+            Self::InProgress(arg0) => Self::InProgress(arg0.clone()),
+            Self::Ended => Self::Ended,
+
+        }
+
+    }
+
+}
+
+impl<T> BasicStatusWithItem<T>
+    where T: Clone
+{
+
+    pub fn clone_progress_item(&self) -> Option<T>
+    {
+
+        if let Self::InProgress(val) = self
+        {
+
+            Some(val.clone())
+
+        }
+        else
+        {
+
+            None
+            
+        }
+
+    }
+
+}
+
+impl<T> Debug for BasicStatusWithItem<T>
+    where T: Debug
+{
+
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::InProgress(arg0) => f.debug_tuple("InProgress").field(arg0).finish(),
+            Self::Ended => write!(f, "Ended"),
+        }
     }
 
 }

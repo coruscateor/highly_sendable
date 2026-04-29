@@ -15,17 +15,9 @@
 [GitHub](https://github.com/coruscateor) | 
 [GitHub Sponsors](https://github.com/sponsors/coruscateor)
 
-Containers for sending Strings and results within your process and beyond.
+Mostly objects that assist with communicating progress and status within your programme and beyond.
 
 </div>
-
-## Running Tests
-
-*cargo test --all-features*
-
-## Building The Documentation
-
-*cargo doc --all-features*
 
 ## Todo
 
