@@ -1,4 +1,4 @@
-commit 1bac7a0ee5028be16683607af850321348936014
+commit 1bac7a0ee5028be16683607af850321348936014 -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Wed Apr 29 14:17:18 2026 +1200
 
@@ -10,7 +10,7 @@ Date:   Wed Apr 29 14:17:18 2026 +1200
     
     - Added the BasicStatusWithItem struct.
 
-commit 6933c9676959046a230a79265b02c56b77138c6e
+commit 6933c9676959046a230a79265b02c56b77138c6e -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Tue Apr 28 16:02:22 2026 +1200
 
@@ -36,7 +36,7 @@ Date:   Tue Apr 28 16:02:22 2026 +1200
     
     - Replaced the EssentialStatus default type of the S generic parameter of the WorkInProgressMessage struct and related types with BasicStatus.
 
-commit 7ad030b33a8e795240f2f1acb6b815f099278944
+commit 7ad030b33a8e795240f2f1acb6b815f099278944 -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Tue Mar 31 18:32:43 2026 +1300
 
@@ -44,7 +44,7 @@ Date:   Tue Mar 31 18:32:43 2026 +1300
     
     - Made the as_str method public in the text::SendableTextImmut implementation.
 
-commit b1bb9f994d62038efa205c5d7ce5298159b856f3
+commit b1bb9f994d62038efa205c5d7ce5298159b856f3 -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Wed Mar 18 13:47:24 2026 +1300
 
@@ -54,7 +54,7 @@ Date:   Wed Mar 18 13:47:24 2026 +1300
     
     - Added the WorkInProgressMessageOption and WorkInProgressMessageResult types.
 
-commit 6269a93830413deca4c8586fccd4f45635d21248
+commit 6269a93830413deca4c8586fccd4f45635d21248 -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Fri Mar 13 17:35:19 2026 +1300
 

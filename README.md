@@ -19,6 +19,17 @@ Mostly objects that assist with communicating progress and status within your pr
 
 </div>
 
+<br />
+
+## Valid Features
+
+| Feature                   | Description                           |
+| -------                   | -----------                           |
+| serde                     | Enable the serde dependant features.  |
+| corlib                    | Enable the corlib dependant features. |
+
+<br />
+
 ## Todo
 
 - Add more documentation
