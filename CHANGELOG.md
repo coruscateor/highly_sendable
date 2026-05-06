@@ -41,6 +41,40 @@ commit 6269a93830413deca4c8586fccd4f45635d21248
 
 Renamed - Added in this version.
 
+commit 0d241dfb105d31df8977ddbdf53dd3a73a25a743
+
+- Added the accessorise, pastey and inc_dec dependencies.
+
+- Added the ConnectionMessage struct.
+
+- Added the ConnectionStateId struct.
+
+- Added the EssentialStatus enum.
+
+- Added the PauseableStatus enum.
+
+-- Added the WorkInProgress struct.
+
+Renamed - Added in this version.
+
+- Added the WorkInProgressMessage struct.
+
+commit 7264154696dfca38a58afa359ac7ec72292e04d2
+
+- Added the SendableTextImmut enum to the text module.
+
+-- Added the WorkInProgressResultIntPercentage and IdedWorkInProgressResultIntPercentage structs.
+
+Then removed
+
+commit 4f3f9d290368862d7bdf1be2acc53c6721fb0c9e
+
+- Added a package.metadata.docs.rs section to the cargo file with the necessary details for rustdoc to label optional features on docs.rs.
+
+commit d172d00a4f67512658d31ce846ff56a15dbc4bef
+
+- Added the license metadata field.
+
 
 
 ### Changed
@@ -83,6 +117,34 @@ commit b1bb9f994d62038efa205c5d7ce5298159b856f3
 
 - Replaced doc_auto_cfg with doc_cfg in the docsrs cfg_attr in the lib file.
 
+commit 7264154696dfca38a58afa359ac7ec72292e04d2
+
+-- Renamed the result methods of WorkInProgressResult and IdedWorkInProgressResult to result_ref.
+
+Added in this version.
+
+-- WorkInProgressResult and IdedWorkInProgressResult now implement the Clone and Default traits.
+
+Added in this version.
+
+-- Disabled the result module.
+
+Removed in this version.
+
+-- Moved the WorkInProgressResult and IdedWorkInProgressResult structs to the crate level module.
+
+Removed in this version.
+
+commit 4f3f9d290368862d7bdf1be2acc53c6721fb0c9e
+
+- Updated the crate version string to 0.2.0-alpha.
+
+commit 4f3f9d290368862d7bdf1be2acc53c6721fb0c9e
+
+-- Renamed the done_none method to none_done and the not_done_none method to none_not_done in the WorkInProgressResult and IdedWorkInProgressResult structs.
+
+Removed in this version.
+
 
 
 ### Deprecated
@@ -99,9 +161,27 @@ commit 6269a93830413deca4c8586fccd4f45635d21248
 
 - Removed the result module.
 
+commit 0d241dfb105d31df8977ddbdf53dd3a73a25a743
+
+-- Removed the WorkInProgressResult and IdedWorkInProgressResult structs.
+
+-- Removed the WorkInProgressResult and IdedWorkInProgressResult structs that were part of the result module.
+
+Added in this version.
+
+commit 4f3f9d290368862d7bdf1be2acc53c6721fb0c9e
+
+- Removed the cfg feature decoration from the sendable_text sub-module use statement in the text module mod file.
+
 
 
 ### Fixed
+
+commit 7cf1b9d5beab7332329b73b3465b8a4442e3f96d
+
+-- Fixed a build error.
+
+No longer relevant.
 
 
 

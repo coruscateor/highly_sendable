@@ -62,7 +62,7 @@ Date:   Fri Mar 13 17:35:19 2026 +1300
     
     - Renamed the WorkInProgress struct to WorkInProgressMessage.
 
-commit 0d241dfb105d31df8977ddbdf53dd3a73a25a743
+commit 0d241dfb105d31df8977ddbdf53dd3a73a25a743 -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Thu Mar 12 19:29:31 2026 +1300
 
@@ -82,7 +82,7 @@ Date:   Thu Mar 12 19:29:31 2026 +1300
     
     - Removed the WorkInProgressResultIntPercentage and IdedWorkInProgressResultIntPercentage structs.
 
-commit 7264154696dfca38a58afa359ac7ec72292e04d2
+commit 7264154696dfca38a58afa359ac7ec72292e04d2 -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Wed Jul 2 17:16:24 2025 +1200
 
@@ -98,7 +98,7 @@ Date:   Wed Jul 2 17:16:24 2025 +1200
     
     - Added the WorkInProgressResultIntPercentage and IdedWorkInProgressResultIntPercentage structs.
 
-commit 4f3f9d290368862d7bdf1be2acc53c6721fb0c9e
+commit 4f3f9d290368862d7bdf1be2acc53c6721fb0c9e -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Tue Jul 1 18:40:47 2025 +1200
 
@@ -110,19 +110,19 @@ Date:   Tue Jul 1 18:40:47 2025 +1200
     
     - Removed the cfg feature decoration from the sendable_text sub-module use statement in the text module mod file.
 
-commit d172d00a4f67512658d31ce846ff56a15dbc4bef
+commit d172d00a4f67512658d31ce846ff56a15dbc4bef -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Tue Apr 1 15:08:50 2025 +1300
 
     Added the license metadata field.
 
-commit 7cf1b9d5beab7332329b73b3465b8a4442e3f96d
+commit 7cf1b9d5beab7332329b73b3465b8a4442e3f96d -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Tue Apr 1 15:06:07 2025 +1300
 
     Fixed a build error.
 
-commit a7bda3ebc64d6472e22b359600dace13f54f56e8
+commit a7bda3ebc64d6472e22b359600dace13f54f56e8 --
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Tue Apr 1 15:00:45 2025 +1300
 
