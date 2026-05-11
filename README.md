@@ -15,7 +15,7 @@
 [GitHub](https://github.com/coruscateor) | 
 [GitHub Sponsors](https://github.com/sponsors/coruscateor)
 
-Mostly objects that assist with communicating progress and status within your programme and beyond.
+Mostly objects that can assist with communicating progress and status within your programme and beyond.
 
 </div>
 

@@ -145,6 +145,11 @@ commit 4f3f9d290368862d7bdf1be2acc53c6721fb0c9e
 
 Removed in this version.
 
+commit 0236ca6d3cedd9c901197da19ddb83a7a00aaf5f
+
+-- Updated various dependencies via the cargo update command.
+
+- Various dependencies were updated via the “cargo update” command.
 
 
 ### Deprecated
