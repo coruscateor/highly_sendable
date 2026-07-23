@@ -9,6 +9,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e86cf82339b10210c4212aee2e4f034fb6b9d181d98d07b98eb98f90b2aca91c"
 
 [[package]]
+name = "bytes"
+version = "1.12.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fc652a48c352aef3ea3aed32080501cf3ef6ed5da78602a020c991775b0aff04"
+
+[[package]]
 name = "cfg-if"
 version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -16,9 +22,9 @@ checksum = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
 
 [[package]]
 name = "corlib"
-version = "0.4.1"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f22336a81a50e4e1223a25f1bb562cb57b24ee819490197352234a25fdf59eb5"
+checksum = "5702430a2ebf0b052f30ef9a5c2be1d520892d67d32e7ce0dfe88578fb79bec2"
 dependencies = [
  "cfg-if",
  "delegate",
@@ -40,6 +46,7 @@ name = "highly_sendable"
 version = "0.2.0"
 dependencies = [
  "accessorise",
+ "bytes",
  "corlib",
  "delegate",
  "inc_dec",
