@@ -1,9 +1,12 @@
-use std::{ops::Deref, sync::Arc};
+use std::{ops::Deref, sync::Arc, fmt::Formatter};
 
 #[cfg(feature = "bytes")]
 use bytes::Bytes;
 
 use crate::text::SendableText;
+
+#[cfg(feature = "serde")]
+use serde::{de::{Error, Visitor}, Deserialize, Deserializer, Serialize, Serializer};
 
 pub enum SendableBytes
 {
@@ -19,6 +22,27 @@ pub enum SendableBytes
 
 impl SendableBytes
 {
+
+    pub fn string(val: String) -> SendableBytes
+    {
+
+        Self::SendableText(SendableText::String(val))
+
+    }
+
+    pub fn str(val: &'static str) -> SendableBytes
+    {
+
+        Self::SendableText(SendableText::Str(val))
+
+    }
+
+    pub fn arc_str(val: Arc<str>) -> SendableBytes
+    {
+
+        Self::SendableText(SendableText::ArcStr(val))
+
+    }
 
     pub fn is_vec(&self) -> bool
     {
@@ -288,3 +312,89 @@ impl From<&SendableText> for SendableBytes
     }
 
 }
+
+cfg_select!
+{
+
+    feature = "serde" =>
+    {
+        
+        impl Serialize for SendableBytes
+        {
+
+            fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+                where
+                    S: Serializer
+            {
+
+                serializer.serialize_bytes(self)
+
+            }
+
+        }
+
+        struct SendableBytesVisitor;
+
+        impl<'de> Visitor<'de> for SendableBytesVisitor
+        {
+
+            type Value = SendableBytes;
+
+            fn expecting(&self, formatter: &mut Formatter<'_>) -> Result<(), std::fmt::Error>
+            {
+                
+                formatter.write_str("A byte array.")
+                
+            }
+
+            fn visit_bytes<E>(self, v: &[u8]) -> Result<Self::Value, E>
+            where
+                E: Error
+            {
+
+                Ok(SendableBytes::Vec(v.into()))
+
+            }
+
+            fn visit_borrowed_bytes<E>(self, v: &'de [u8]) -> Result<Self::Value, E>
+            where
+                E: Error
+            {
+
+                Ok(SendableBytes::Vec(v.into()))
+
+            }
+
+            fn visit_byte_buf<E>(self, v: Vec<u8>) -> Result<Self::Value, E>
+            where
+                E: Error,
+            {
+
+                Ok(SendableBytes::Vec(v))
+
+            }
+
+        }
+        
+        impl<'de> Deserialize<'de> for SendableBytes
+        {
+
+            fn deserialize<D>(deserialiser: D) -> Result<Self, D::Error>
+                where D: Deserializer<'de>
+            {
+
+                let visitor = SendableBytesVisitor{};
+
+                deserialiser.deserialize_byte_buf(visitor)
+            
+            }
+
+        }
+    
+    }
+    _ =>
+    {
+    }
+
+}
+

@@ -2,7 +2,7 @@
 #[cfg(feature = "serde")]
 use serde::{Serialize, Deserialize};
 
-use accessorise::{impl_get_ref_mut, impl_get_ref, impl_get_mut};
+use accessorise::{impl_ref_mut_getters, impl_ref_getter, impl_mut_getter}; //{impl_get_ref_mut, impl_get_ref, impl_get_mut};
 
 use pastey::paste;
 
@@ -44,11 +44,17 @@ impl<T, S, M> WorkInProgressMessage<T, S, M>
 
     }
 
-    impl_get_ref_mut!(value, T);
+    impl_ref_mut_getters!(value, T);
 
-    impl_get_ref_mut!(status, S);
+    //impl_get_ref_mut!(value, T);
 
-    impl_get_ref_mut!(meta_data, M);
+    impl_ref_mut_getters!(status, S);
+
+    //impl_get_ref_mut!(status, S);
+
+    impl_ref_mut_getters!(meta_data, M);
+
+    //impl_get_ref_mut!(meta_data, M);
 
     pub fn take(self) -> (T, S, M)
     {

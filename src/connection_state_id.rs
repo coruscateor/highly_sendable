@@ -1,6 +1,6 @@
 use std::fmt::Display;
 
-use accessorise::impl_get_val;
+use accessorise::impl_val_getter; //impl_get_val;
 
 use inc_dec::IntIncDecSelf;
 
@@ -33,7 +33,9 @@ impl ConnectionStateId
 
     }
 
-    impl_get_val!(id_number, u32, "Gets the current id number value.");
+    impl_val_getter!(id_number, u32, "Gets the current id number value.");
+
+    //impl_get_val!(id_number, u32, "Gets the current id number value.");
 
     pub fn next(&mut self) -> Self
     {

@@ -4,7 +4,7 @@ use crate::ConnectionStateId;
 
 use pastey::paste;
 
-use accessorise::{impl_get_val, impl_get_ref, impl_get_mut};
+use accessorise::{impl_val_getter, impl_ref_getter, impl_mut_getter}; //{impl_get_val, impl_get_ref, impl_get_mut};
 
 ///
 /// A message type that contains a ConnectionStateId and an inner message.
@@ -40,11 +40,17 @@ impl<T> ConnectionMessage<T>
 
     }
 
-    impl_get_val!(connection_state_id, ConnectionStateId);
+    impl_val_getter!(connection_state_id, ConnectionStateId);
 
-    impl_get_ref!(message, T);
+    //impl_get_val!(connection_state_id, ConnectionStateId);
 
-    impl_get_mut!(message, T);
+    impl_ref_getter!(message, T);
+
+    //impl_get_ref!(message, T);
+
+    impl_mut_getter!(message, T);
+
+    //impl_get_mut!(message, T);
 
     pub fn take_message(self) -> T
     {
