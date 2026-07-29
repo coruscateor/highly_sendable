@@ -32,13 +32,23 @@ mod status_definitions;
 
 pub use status_definitions::*;
 
-mod connection_state_id;
+mod variable_state_number;
 
-pub use connection_state_id::*;
+pub use variable_state_number::*;
 
-mod connection_message;
+mod variable_state_message;
 
-pub use connection_message::*;
+pub use variable_state_message::*;
+
+//Disabled
+
+//mod connection_state_id;
+
+//pub use connection_state_id::*;
+
+//mod connection_message;
+
+//pub use connection_message::*;
 
 mod sendable_bytes;
 
