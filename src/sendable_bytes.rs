@@ -169,6 +169,7 @@ impl Into<Vec<u8>> for SendableBytes
                //vec
 
             }
+            #[cfg(feature = "bytes")]
             SendableBytes::Bytes(bytes) =>
             {
 
@@ -201,6 +202,18 @@ impl Deref for SendableBytes
 
     }
 
+}
+
+impl AsRef<[u8]> for SendableBytes
+{
+
+    fn as_ref(&self) -> &[u8]
+    {
+
+        self.as_slice()
+
+    }
+    
 }
 
 impl From<Vec<u8>> for SendableBytes
