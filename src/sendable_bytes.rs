@@ -122,6 +122,54 @@ impl SendableBytes
 
     }
 
+    pub fn len(&self) -> usize
+    {
+
+        match self
+        {
+
+            SendableBytes::Vec(items) => items.len(),
+            SendableBytes::Slice(items) => items.len(),
+            SendableBytes::ArcSlice(items) => items.len(),
+            SendableBytes::Bytes(bytes) => bytes.len(),
+            SendableBytes::SendableText(sendable_text) => sendable_text.len()
+
+        }
+
+    }
+
+    pub fn capacity(&self) -> usize
+    {
+
+        match self
+        {
+
+            SendableBytes::Vec(items) => items.capacity(),
+            SendableBytes::Slice(items) => items.len(),
+            SendableBytes::ArcSlice(items) => items.len(),
+            SendableBytes::Bytes(bytes) => bytes.len(),
+            SendableBytes::SendableText(sendable_text) => sendable_text.capacity()
+
+        }
+
+    }
+
+    pub fn len_is_at_capacity(&self) -> bool
+    {
+
+        match self
+        {
+
+            SendableBytes::Vec(items) => items.len() == items.capacity(),
+            SendableBytes::Slice(_items) => true,
+            SendableBytes::ArcSlice(_items) => true,
+            SendableBytes::Bytes(_bytes) => true,
+            SendableBytes::SendableText(sendable_text) => sendable_text.len_is_at_capacity()
+
+        }
+
+    }
+
 }
 
 impl Default for SendableBytes

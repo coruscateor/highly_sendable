@@ -93,6 +93,48 @@ impl SendableText
 
     }
 
+    pub fn len(&self) -> usize
+    {
+
+        match self
+        {
+
+            SendableText::String(val) => val.len(),
+            SendableText::Str(val) => val.len(),
+            SendableText::ArcStr(val) => val.len()
+
+        }
+
+    }
+
+    pub fn capacity(&self) -> usize
+    {
+
+        match self
+        {
+
+            SendableText::String(val) => val.capacity(),
+            SendableText::Str(val) => val.len(),
+            SendableText::ArcStr(val) => val.len()
+
+        }
+
+    }
+
+    pub fn len_is_at_capacity(&self) -> bool
+    {
+
+        match self
+        {
+
+            SendableText::String(val) => val.len() == val.capacity(),
+            SendableText::Str(_val) => true,
+            SendableText::ArcStr(_val) => true
+            
+        }
+
+    }
+
 }
 
 impl Default for SendableText
