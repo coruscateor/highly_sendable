@@ -54,19 +54,10 @@ mod sendable_bytes;
 
 pub use sendable_bytes::*;
 
-/*
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+mod sendable_ref;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub use sendable_ref::*;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
-*/
+mod cowable_ref;
+
+pub use cowable_ref::*;
