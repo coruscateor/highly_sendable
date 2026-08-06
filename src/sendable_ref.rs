@@ -16,6 +16,27 @@ impl<T> SendableRef<T>
     where T: 'static //Send + Sync +
 {
 
+    pub fn is_box(&self) -> bool
+    {
+
+        matches!(self, Self::Box(_))
+
+    }
+
+    pub fn is_static(&self) -> bool
+    {
+
+        matches!(self, Self::Static(_))
+
+    }
+
+    pub fn is_arc(&self) -> bool
+    {
+
+        matches!(self, Self::Arc(_))
+
+    }
+
     pub fn get_mut(&mut self) -> Option<&mut T>
     {
 
