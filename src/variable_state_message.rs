@@ -33,10 +33,10 @@ impl<T> VariableStateMessage<T>
 
     }
 
-    pub fn same_number<N>(&self, message: N) -> VariableStateMessage::<N> 
+    pub fn same_number<M>(&self, message: M) -> VariableStateMessage::<M> 
     {
 
-        VariableStateMessage::<N>::new(self.variable_state_number, message)
+        VariableStateMessage::<M>::new(self.variable_state_number, message)
 
     }
 

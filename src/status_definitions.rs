@@ -5,7 +5,7 @@ use std::fmt::Debug;
 use serde::{Serialize, Deserialize};
 
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-#[derive(Clone, Default, Debug)]
+#[derive(Clone, Default, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub enum EssentialStatus
 {
 
@@ -35,7 +35,7 @@ impl EssentialStatus
 }
 
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-#[derive(Clone, Default, Debug)]
+#[derive(Clone, Default, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub enum PauseableStatus
 {
 
@@ -73,7 +73,7 @@ impl PauseableStatus
 }
 
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-#[derive(Clone, Default, Debug)]
+#[derive(Clone, Default, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub enum BasicStatus
 {
 
@@ -123,6 +123,39 @@ impl<T> BasicStatusWithItem<T>
 
     }
 
+    pub fn is_ended(&self) -> bool
+    {
+
+        matches!(self, Self::Ended)
+
+    }
+
+    pub fn progress_item_ref(&self) -> Option<&T>
+    {
+
+        match self
+        {
+
+            BasicStatusWithItem::InProgress(val) => Some(val),
+            BasicStatusWithItem::Ended => None
+
+        }
+
+    }
+
+    pub fn progress_item_mut(&mut self) -> Option<&mut T>
+    {
+
+        match self
+        {
+
+            BasicStatusWithItem::InProgress(val) => Some(val),
+            BasicStatusWithItem::Ended => None
+
+        }
+
+    }
+
     pub fn take_progress_item(self) -> Option<T>
     {
 
@@ -138,13 +171,6 @@ impl<T> BasicStatusWithItem<T>
             None
             
         }
-
-    }
-
-    pub fn is_ended(&self) -> bool
-    {
-
-        matches!(self, Self::Ended)
 
     }
 
@@ -205,3 +231,80 @@ impl<T> Debug for BasicStatusWithItem<T>
     }
 
 }
+
+impl<T> Default for BasicStatusWithItem<T>
+    where T: Default
+{
+
+    fn default() -> Self
+    {
+        
+        Self::InProgress(T::default())
+
+    }
+
+}
+
+impl<T> PartialEq for BasicStatusWithItem<T>
+    where T: PartialEq
+{
+
+    fn eq(&self, other: &Self) -> bool
+    {
+
+        match (self, other)
+        {
+
+            (Self::InProgress(lref), Self::InProgress(rref)) => lref == rref,
+            _ => false
+
+        }
+
+    }
+
+}
+
+impl<T> Eq for BasicStatusWithItem<T>
+    where T: Eq
+{
+}
+
+impl<T> PartialOrd for BasicStatusWithItem<T>
+    where T: PartialOrd
+{
+
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering>
+    {
+
+        match (self, other)
+        {
+
+            (Self::InProgress(lref), Self::InProgress(rref)) => lref.partial_cmp(rref),
+            _ => None
+
+        }
+
+    }
+
+}
+
+/*
+impl<T> Ord for BasicStatusWithItem<T>
+    where T: Ord
+{
+
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering
+    {
+
+        match (self, other)
+        {
+
+            (Self::InProgress(lref), Self::InProgress(rref)) => lref.cmp(rref),
+            _ => None
+
+        }
+
+    }
+
+}
+*/

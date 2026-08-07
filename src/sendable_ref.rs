@@ -1,5 +1,4 @@
-use std::{ops::{Deref, DerefMut}, sync::Arc};
-
+use std::{ops::Deref, sync::Arc};
 
 pub enum SendableRef<T>
     where T: 'static
