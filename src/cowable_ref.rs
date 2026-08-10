@@ -1,10 +1,10 @@
-use std::{borrow::Cow, ops::Deref, sync::Arc};
+use std::{borrow::Cow, ops::Deref};
 
 use crate::SendableRef;
 
 
 pub enum CowableRef<'a, T>
-    where T: Clone + 'static // Send + Sync +
+    where T: Send + ?Sized + Clone + 'static //'a + ToOwned + ?Sized + 'static // Send + Sync +
 {
 
     Ref(SendableRef<T>),
@@ -13,7 +13,7 @@ pub enum CowableRef<'a, T>
 }
 
 impl<'a, T> CowableRef<'a, T>
-    where T: Clone + 'static
+    where T: Send + ?Sized + Clone + 'static //'a + ToOwned + ?Sized + 'static //Clone + 'static
 {
 
     pub fn is_ref(&self) -> bool
@@ -67,7 +67,7 @@ impl<'a, T> CowableRef<'a, T>
 }
 
 impl<'a, T> AsRef<T> for CowableRef<'a, T>
-    where T: Clone + 'static
+    where T: Send + ?Sized + Clone + 'static
 {
 
     fn as_ref(&self) -> &T
@@ -86,7 +86,7 @@ impl<'a, T> AsRef<T> for CowableRef<'a, T>
 }
 
 impl<'a, T> Deref for CowableRef<'a, T>
-    where T: Clone + 'static
+    where T: Send + ?Sized + Clone + 'static
 {
     type Target = T;
 

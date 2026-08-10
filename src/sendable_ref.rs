@@ -1,7 +1,7 @@
 use std::{ops::Deref, sync::Arc};
 
 pub enum SendableRef<T>
-    where T: 'static
+    where T: Send + ?Sized + 'static
     //where T: Send + Sync + 'static
 {
 
@@ -12,7 +12,7 @@ pub enum SendableRef<T>
 }
 
 impl<T> SendableRef<T>
-    where T: 'static //Send + Sync +
+    where T: Send + ?Sized + 'static //Send + Sync +
 {
 
     pub fn is_box(&self) -> bool
@@ -53,6 +53,7 @@ impl<T> SendableRef<T>
 }
 
 impl<T> AsRef<T> for SendableRef<T>
+    where T: Send + ?Sized + 'static
 {
 
     fn as_ref(&self) -> &T
@@ -72,6 +73,7 @@ impl<T> AsRef<T> for SendableRef<T>
 }
 
 impl<T> Deref for SendableRef<T>
+    where T: Send + ?Sized + 'static
 {
 
     type Target = T;
