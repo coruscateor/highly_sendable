@@ -1,7 +1,9 @@
-use std::{borrow::Cow, ops::Deref};
+use std::{borrow::Cow, fmt::Formatter, marker::PhantomData, ops::Deref};
 
 use crate::SendableRef;
 
+#[cfg(feature = "serde")]
+use serde::{de::{Error, Visitor, EnumAccess}, Deserialize, Deserializer, Serialize, Serializer};
 
 pub enum CowableRef<'a, T>
     where T: Send + ?Sized + Clone + 'static //'a + ToOwned + ?Sized + 'static // Send + Sync +
@@ -103,4 +105,117 @@ impl<'a, T> Deref for CowableRef<'a, T>
 
     }
     
+}
+
+cfg_select!
+{
+
+    feature = "serde" =>
+    {
+        
+        impl<'a, T> Serialize for CowableRef<'a, T>
+            where T: Send + ?Sized + Clone + 'static + Serialize
+        {
+
+            fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+                where
+                    S: Serializer
+            {
+
+                match self
+                {
+
+                    CowableRef::Ref(object) =>
+                    {
+
+                        serializer.serialize_newtype_variant("CowableRef", 0, "Ref", object)
+
+                    }
+                    CowableRef::Cow(object) =>
+                    {
+
+                        serializer.serialize_newtype_variant("CowableRef", 1, "Cow", object)
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        struct CowableRefVisitor<'de, 'a, T>
+             where T: Send + ?Sized + Clone + 'static + Deserialize<'de>
+        {
+
+            phantom: PhantomData<T>,
+            phantom2: PhantomData<&'a T>,
+            phantom3: PhantomData<&'de T>
+
+        }
+
+        impl<'de, 'a, T> Default for CowableRefVisitor<'de, 'a, T>
+            where T: Send + ?Sized + Clone + 'static + Deserialize<'de>
+        {
+
+            fn default() -> Self
+            {
+
+                Self
+                {
+                    
+                    phantom: PhantomData::default(),
+                    phantom2: PhantomData::default(),
+                    phantom3: PhantomData::default()
+                
+                }
+
+            }
+
+        }
+
+        impl<'de, 'a,  T> Visitor<'de> for CowableRefVisitor<'de, 'a, T>
+            where T: Send + ?Sized + Clone + 'static + Deserialize<'de>
+        {
+
+            type Value = CowableRef<'a, T>;
+
+            fn expecting(&self, formatter: &mut Formatter<'_>) -> Result<(), std::fmt::Error>
+            {
+                
+                formatter.write_str("An enum")
+                
+            }
+
+            fn visit_enum<A>(self, data: A) -> Result<Self::Value, A::Error>
+                where A: EnumAccess<'de>
+            {
+
+                Ok(data.variant()?.0)
+
+            }
+
+        }
+
+        impl<'de, 'a, T> Deserialize<'de> for CowableRef<'a, T>
+            where T: Send + ?Sized + Clone + 'static + Deserialize<'de>
+        {
+
+            fn deserialize<D>(deserialiser: D) -> Result<Self, D::Error>
+                where D: Deserializer<'de>
+            {
+
+                let visitor = CowableRefVisitor::default();
+
+                deserialiser.deserialize_enum("CowableRef", &["Ref", "Cow"], visitor)
+            
+            }
+
+        }
+
+    }
+    _ =>
+    {
+    }
+
 }

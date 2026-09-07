@@ -7,7 +7,7 @@ use pastey::paste;
 use accessorise::{impl_val_getter, impl_ref_getter, impl_mut_getter}; //{impl_get_val, impl_get_ref, impl_get_mut};
 
 ///
-/// A message type that contains a ConnectionStateId and an inner message.
+/// An object that contains a VariableStateNumber and a message.
 /// 
 pub struct VariableStateMessage<T>
 {

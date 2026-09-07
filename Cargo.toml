@@ -18,9 +18,9 @@ serde = { version = "1.0.228", features = ["derive"], optional = true }
 
 corlib = { version = "0.5.0", optional = true }
 
-#accessorise = "0.2.0"
+accessorise = "0.3.0"
 
-accessorise = { path = "../accessorise" }
+#accessorise = { path = "../accessorise" } //Do not remove
 
 pastey = "0.2.2"
 

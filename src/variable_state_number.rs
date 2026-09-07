@@ -12,7 +12,7 @@ use serde::{Serialize, Deserialize};
 use crate::VariableStateMessage;
 
 ///
-/// An id uniquely identifying the current connection state. Useful for filtering out irrelevant messages in pipelines that deal with networking.
+/// A number used for differentiation between states. Useful for filtering out irrelevant messages in pipelines that deal with networking.
 /// 
 #[derive(Default, PartialEq, Eq, PartialOrd, Ord, Clone, Copy, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
@@ -33,7 +33,7 @@ impl VariableStateNumber
 
     }
 
-    impl_val_getter!(variable_state_number, u32, "Gets the current id number value.");
+    impl_val_getter!(variable_state_number, u32, "Gets the current number value.");
 
     //impl_get_val!(id_number, u32, "Gets the current id number value.");
 
