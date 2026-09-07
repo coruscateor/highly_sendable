@@ -131,6 +131,7 @@ impl SendableBytes
             SendableBytes::Vec(items) => items.len(),
             SendableBytes::Slice(items) => items.len(),
             SendableBytes::ArcSlice(items) => items.len(),
+            #[cfg(feature = "bytes")]
             SendableBytes::Bytes(bytes) => bytes.len(),
             SendableBytes::SendableText(sendable_text) => sendable_text.len()
 
@@ -147,6 +148,7 @@ impl SendableBytes
             SendableBytes::Vec(items) => items.capacity(),
             SendableBytes::Slice(items) => items.len(),
             SendableBytes::ArcSlice(items) => items.len(),
+            #[cfg(feature = "bytes")]
             SendableBytes::Bytes(bytes) => bytes.len(),
             SendableBytes::SendableText(sendable_text) => sendable_text.capacity()
 
@@ -163,6 +165,7 @@ impl SendableBytes
             SendableBytes::Vec(items) => items.len() == items.capacity(),
             SendableBytes::Slice(_items) => true,
             SendableBytes::ArcSlice(_items) => true,
+            #[cfg(feature = "bytes")]
             SendableBytes::Bytes(_bytes) => true,
             SendableBytes::SendableText(sendable_text) => sendable_text.len_is_at_capacity()
 
@@ -324,28 +327,39 @@ impl From<&Arc<[u8]>> for SendableBytes
 
 }
 
-#[cfg(feature = "bytes")]
-impl From<Bytes> for SendableBytes
+cfg_select!
 {
 
-    fn from(value: Bytes) -> Self
+    feature = "bytes" =>
     {
-        
-        Self::Bytes(value)
+
+        impl From<Bytes> for SendableBytes
+        {
+
+            fn from(value: Bytes) -> Self
+            {
+                
+                Self::Bytes(value)
+
+            }
+
+        }
+
+        impl From<&Bytes> for SendableBytes
+        {
+
+            fn from(value: &Bytes) -> Self
+            {
+                
+                Self::Bytes(value.clone())
+
+            }
+
+        }
 
     }
-
-}
-
-#[cfg(feature = "bytes")]
-impl From<&Bytes> for SendableBytes
-{
-
-    fn from(value: &Bytes) -> Self
+    _ =>
     {
-        
-        Self::Bytes(value.clone())
-
     }
 
 }

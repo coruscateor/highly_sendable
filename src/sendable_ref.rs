@@ -1,8 +1,7 @@
 use std::{fmt::Formatter, marker::PhantomData, ops::Deref, sync::Arc};
 
-use serde::de::EnumAccess;
 #[cfg(feature = "serde")]
-use serde::{de::{Error, Visitor}, Deserialize, Deserializer, Serialize, Serializer};
+use serde::{de::{Error, Visitor, EnumAccess}, Deserialize, Deserializer, Serialize, Serializer};
 
 pub enum SendableRef<T>
     where T: Send + ?Sized + 'static
@@ -227,6 +226,9 @@ cfg_select!
 
         }
 
+    }
+    _ =>
+    {
     }
 
 }
