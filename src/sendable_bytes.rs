@@ -8,6 +8,7 @@ use crate::text::SendableText;
 #[cfg(feature = "serde")]
 use serde::{de::{Error, Visitor}, Deserialize, Deserializer, Serialize, Serializer};
 
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub enum SendableBytes
 {
 

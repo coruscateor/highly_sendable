@@ -1,15 +1,18 @@
 use std::{borrow::Cow, fmt::Formatter, marker::PhantomData, ops::Deref};
 
+use std::fmt::Debug;
+
 use crate::SendableRef;
 
 #[cfg(feature = "serde")]
 use serde::{de::{Error, Visitor, EnumAccess}, Deserialize, Deserializer, Serialize, Serializer};
 
+#[derive(Clone)]
 pub enum CowableRef<'a, T>
     where T: Send + ?Sized + Clone + 'static //'a + ToOwned + ?Sized + 'static // Send + Sync +
 {
 
-    Ref(SendableRef<T>),
+    SendableRef(SendableRef<T>),
     Cow(Cow<'a, T>)
     
 }
@@ -18,10 +21,10 @@ impl<'a, T> CowableRef<'a, T>
     where T: Send + ?Sized + Clone + 'static //'a + ToOwned + ?Sized + 'static //Clone + 'static
 {
 
-    pub fn is_ref(&self) -> bool
+    pub fn is_sendable_ref(&self) -> bool
     {
 
-        matches!(self, Self::Ref(_))
+        matches!(self, Self::SendableRef(_))
 
     }
 
@@ -32,24 +35,24 @@ impl<'a, T> CowableRef<'a, T>
 
     }
 
-    pub fn is_ref_box(&self) -> bool
+    pub fn is_sendable_ref_box(&self) -> bool
     {
 
-        matches!(self, Self::Ref(SendableRef::Box(_)))
+        matches!(self, Self::SendableRef(SendableRef::Box(_)))
 
     }
 
-    pub fn is_ref_static(&self) -> bool
+    pub fn is_sendable_ref_static(&self) -> bool
     {
 
-        matches!(self, Self::Ref(SendableRef::Static(_)))
+        matches!(self, Self::SendableRef(SendableRef::Static(_)))
 
     }
 
-    pub fn is_ref_arc(&self) -> bool
+    pub fn is_sendable_ref_arc(&self) -> bool
     {
 
-        matches!(self, Self::Ref(SendableRef::Arc(_)))
+        matches!(self, Self::SendableRef(SendableRef::Arc(_)))
 
     }
 
@@ -59,7 +62,7 @@ impl<'a, T> CowableRef<'a, T>
         match self
         {
 
-            CowableRef::Ref(sendable_ref) => sendable_ref.get_mut(),
+            CowableRef::SendableRef(sendable_ref) => sendable_ref.get_mut(),
             CowableRef::Cow(cow) => Some(cow.to_mut())
             
         }
@@ -78,7 +81,7 @@ impl<'a, T> AsRef<T> for CowableRef<'a, T>
         match self
         {
 
-            CowableRef::Ref(sendable_ref) => sendable_ref.as_ref(),
+            CowableRef::SendableRef(sendable_ref) => sendable_ref.as_ref(),
             CowableRef::Cow(cow) => cow.as_ref()
 
         }
@@ -98,13 +101,45 @@ impl<'a, T> Deref for CowableRef<'a, T>
         match self
         {
 
-            CowableRef::Ref(sendable_ref) => &*sendable_ref,
+            CowableRef::SendableRef(sendable_ref) => &*sendable_ref,
             CowableRef::Cow(cow) => &*cow
 
         }
 
     }
     
+}
+
+impl<'a, T> PartialEq for CowableRef<'a, T>
+    where T: Send + ?Sized + Clone + 'static + PartialEq
+{
+
+    fn eq(&self, other: &Self) -> bool {
+        match (self, other) {
+            (Self::SendableRef(l0), Self::SendableRef(r0)) => l0 == r0,
+            (Self::Cow(l0), Self::Cow(r0)) => l0 == r0,
+            _ => false,
+        }
+    }
+
+}
+
+impl<'a, T> Eq for CowableRef<'a, T>
+    where T: Send + ?Sized + Clone + 'static + Eq
+{
+}
+
+impl<'a, T> Debug for CowableRef<'a, T>
+    where T: Send + ?Sized + Clone + 'static + Debug
+{
+
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::SendableRef(arg0) => f.debug_tuple("SendableRef").field(arg0).finish(),
+            Self::Cow(arg0) => f.debug_tuple("Cow").field(arg0).finish(),
+        }
+    }
+
 }
 
 cfg_select!
@@ -125,10 +160,10 @@ cfg_select!
                 match self
                 {
 
-                    CowableRef::Ref(object) =>
+                    CowableRef::SendableRef(object) =>
                     {
 
-                        serializer.serialize_newtype_variant("CowableRef", 0, "Ref", object)
+                        serializer.serialize_newtype_variant("CowableRef", 0, "SendableRef", object)
 
                     }
                     CowableRef::Cow(object) =>
@@ -207,7 +242,7 @@ cfg_select!
 
                 let visitor = CowableRefVisitor::default();
 
-                deserialiser.deserialize_enum("CowableRef", &["Ref", "Cow"], visitor)
+                deserialiser.deserialize_enum("CowableRef", &["SendableRef", "Cow"], visitor)
             
             }
 

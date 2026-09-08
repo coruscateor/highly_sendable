@@ -1,4 +1,4 @@
-use corlib::collections::Queue;
+use std::collections::VecDeque;
 
 use delegate::delegate;
 
@@ -10,7 +10,7 @@ use super::SendableText;
 pub struct SendableTextLog
 {
 
-    st_queue: Queue<SendableText>,
+    st_queue: VecDeque<SendableText>,
     limit: usize
 
 }
@@ -24,7 +24,7 @@ impl SendableTextLog
         Self
         {
 
-            st_queue: Queue::new(),
+            st_queue: VecDeque::new(),
             limit
 
         }
@@ -37,7 +37,7 @@ impl SendableTextLog
         Self
         {
 
-            st_queue: Queue::with_capacity(capacity),
+            st_queue: VecDeque::with_capacity(capacity),
             limit: capacity
 
         }
@@ -50,7 +50,7 @@ impl SendableTextLog
         Self
         {
 
-            st_queue: Queue::with_capacity(capacity),
+            st_queue: VecDeque::with_capacity(capacity),
             limit
 
         }
@@ -91,11 +91,11 @@ impl SendableTextLog
         if self.st_queue.len() == self.limit
         {
 
-            self.st_queue.pop();
+            self.st_queue.pop_back();
 
         }
 
-        self.st_queue.push(st);
+        self.st_queue.push_front(st);
 
     }
 

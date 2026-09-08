@@ -1,4 +1,4 @@
-use std::{fmt::Formatter, marker::PhantomData, ops::Deref, sync::Arc};
+use std::{fmt::{Debug, Formatter}, marker::PhantomData, ops::Deref, sync::Arc};
 
 #[cfg(feature = "serde")]
 use serde::{de::{Error, Visitor, EnumAccess}, Deserialize, Deserializer, Serialize, Serializer};
@@ -93,6 +93,59 @@ impl<T> Deref for SendableRef<T>
             
         }
 
+    }
+
+}
+
+impl<T> PartialEq for SendableRef<T>
+    where T: Send + ?Sized + 'static + PartialEq
+{
+
+    fn eq(&self, other: &Self) -> bool {
+        match (self, other) {
+            (Self::Box(l0), Self::Box(r0)) => l0 == r0,
+            (Self::Static(l0), Self::Static(r0)) => l0 == r0,
+            (Self::Arc(l0), Self::Arc(r0)) => l0 == r0,
+            _ => false,
+        }
+    }
+
+}
+
+impl<T> Eq for SendableRef<T>
+    where T: Send + ?Sized + 'static + Eq
+{
+}
+
+impl<T> Clone for SendableRef<T>
+    where T: Send + ?Sized + 'static + Clone
+{
+
+    fn clone(&self) -> Self
+    {
+
+        match self
+        {
+
+            Self::Box(val) => Self::Box(val.clone()),
+            Self::Static(val) => Self::Static(val),
+            Self::Arc(val) => Self::Arc(val.clone())
+
+        }
+    }
+
+}
+
+impl<T> Debug for SendableRef<T>
+    where T: Send + ?Sized + 'static + Debug
+{
+
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Box(arg0) => f.debug_tuple("Box").field(arg0).finish(),
+            Self::Static(arg0) => f.debug_tuple("Static").field(arg0).finish(),
+            Self::Arc(arg0) => f.debug_tuple("Arc").field(arg0).finish(),
+        }
     }
 
 }
