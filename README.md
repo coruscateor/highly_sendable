@@ -25,8 +25,9 @@ Mostly objects that can assist with communicating progress and status within you
 
 | Feature                   | Description                           |
 | -------                   | -----------                           |
-| serde                     | Enable the serde dependant features.  |
-| corlib                    | Enable the corlib dependant features. |
+| serde                     | Enables serde dependant features.  |
+| corlib                    | Enables corlib dependant features. |
+| bytes                     | Enables bytes dependant features.  |
 
 <br />
 

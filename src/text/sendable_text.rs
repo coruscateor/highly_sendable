@@ -9,7 +9,7 @@ use serde::{de::{Error, Visitor}, Deserialize, Deserializer, Serialize, Serializ
 ///
 /// Ideal for when you want to move text between threads.
 /// 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
 pub enum SendableText
 {
 

@@ -77,6 +77,25 @@ impl<T> VariableStateMessage<T>
 
 }
 
+impl<T> Clone for VariableStateMessage<T>
+    where T: Clone
+{
+
+    fn clone(&self) -> Self
+    {
+
+        Self
+        {
+            
+            variable_state_number: self.variable_state_number.clone(),
+            message: self.message.clone()
+        
+        }
+        
+    }
+
+}
+
 impl<T> Display for VariableStateMessage<T>
     where T: Display
 {
