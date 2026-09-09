@@ -1,7 +1,7 @@
 use std::{fmt::{Debug, Formatter}, marker::PhantomData, ops::Deref, sync::Arc};
 
 #[cfg(feature = "serde")]
-use serde::{de::{Error, Visitor, EnumAccess}, Deserialize, Deserializer, Serialize, Serializer};
+use serde::{de::{Visitor, EnumAccess}, Deserialize, Deserializer, Serialize, Serializer};
 
 pub enum SendableRef<T>
     where T: Send + ?Sized + 'static
@@ -50,6 +50,51 @@ impl<T> SendableRef<T>
             SendableRef::Arc(val) => Arc::get_mut(val)
 
         }
+
+    }
+
+    pub fn clone_if_not_box(&self) -> Option<SendableRef<T>>
+        //where T: Clone
+    {
+
+        match self
+        {
+
+            SendableRef::Box(_) =>
+            {
+
+                None
+
+            }
+            SendableRef::Static(val) =>
+            {
+
+                Some(SendableRef::Static(val))
+
+            }
+            SendableRef::Arc(val) =>
+            {
+
+                Some(SendableRef::Arc(val.clone()))
+
+            }
+
+        }
+
+        /*
+        if self.is_box()
+        {
+
+            None
+
+        }
+        else
+        {
+
+            Some(self.clone())
+            
+        }
+        */
 
     }
 

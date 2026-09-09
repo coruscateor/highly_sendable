@@ -1,9 +1,9 @@
 [package]
 name = "highly_sendable"
-version = "0.2.0"
+version = "0.3.0-beta"
 edition = "2024"
 license = "MIT OR Apache-2.0"
-description = "Mostly objects that can assist with communicating progress and status within your programme and beyond."
+description = "Sendable objects that can assist with communicating progress and status within your programme and beyond."
 repository = "https://github.com/coruscateor/highly_sendable"
 homepage = "https://coruscateor.com/projects/highly-sendable"
 keywords = ["send", "result", "text", "progress", "status"]
@@ -14,7 +14,7 @@ rust-version = "1.95.0"
 
 delegate = "0.13.5"
 
-serde = { version = "1.0.228", features = ["derive"], optional = true }
+serde = { version = "1.0.229", features = ["derive"], optional = true }
 
 corlib = { version = "0.5.0", optional = true }
 
@@ -22,9 +22,9 @@ accessorise = "0.3.0"
 
 #accessorise = { path = "../accessorise" } //Do not remove
 
-pastey = "0.2.2"
+pastey = "0.2.3"
 
-inc_dec = "0.1.0"
+inc_dec = "0.2.0"
 
 bytes = { version = "1.12.1", optional = true }
 

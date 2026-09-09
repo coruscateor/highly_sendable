@@ -135,6 +135,29 @@ impl SendableText
 
     }
 
+    pub fn clone_if_not_string(&self) -> Option<SendableText>
+    {
+
+        match self
+        {
+
+            SendableText::String(_) =>
+            {
+
+                None
+
+            }
+            _ =>
+            {
+
+                Some(self.clone())
+
+            }
+            
+        }
+
+    }
+
 }
 
 impl Default for SendableText

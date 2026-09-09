@@ -44,6 +44,21 @@ impl<T, S, M> WorkInProgressMessage<T, S, M>
 
     }
 
+    pub fn value_status(value: T, status: S) -> Self
+        where M: Default
+    {
+
+        Self
+        {
+            
+            value,
+            status,
+            meta_data: Default::default()
+        
+        }
+
+    }
+
     impl_ref_mut_getters!(value, T);
 
     //impl_get_ref_mut!(value, T);
@@ -81,26 +96,6 @@ impl<T, S, M> WorkInProgressMessage<T, S, M>
     {
 
         self.meta_data
-
-    }
-
-}
-
-impl<T, S, M> WorkInProgressMessage<T, S, M>
-    where M: Default
-{
-
-    pub fn value_status(value: T, status: S) -> Self
-    {
-
-        Self
-        {
-            
-            value,
-            status,
-            meta_data: Default::default()
-        
-        }
 
     }
 

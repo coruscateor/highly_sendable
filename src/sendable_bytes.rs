@@ -174,6 +174,51 @@ impl SendableBytes
 
     }
 
+    pub fn clone_if_not_vec_or_string(&self) -> Option<SendableBytes>
+    {
+
+        match self
+        {
+
+            SendableBytes::Vec(_) =>
+            {
+
+                None
+
+            }
+            SendableBytes::SendableText(text) =>
+            {
+
+                match text
+                {
+
+                    SendableText::String(_) =>
+                    {
+
+                        None
+
+                    }
+                    _ =>
+                    {
+
+                        Some(self.clone())
+
+                    }
+                    
+                }
+
+            }
+            _ =>
+            {
+
+                Some(self.clone())
+
+            }
+
+        }
+
+    }
+
 }
 
 impl Default for SendableBytes
