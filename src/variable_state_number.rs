@@ -2,7 +2,7 @@ use std::fmt::Display;
 
 use accessorise::impl_val_getter; //impl_get_val;
 
-use inc_dec::IntIncDecSelf;
+use inc_dec::IntIncDecExt;
 
 use pastey::paste;
 
@@ -12,14 +12,16 @@ use serde::{Serialize, Deserialize};
 use crate::VariableStateMessage;
 
 ///
-/// A number used for differentiation between states. Useful for filtering out irrelevant messages in pipelines that deal with networking.
+/// A number used for differentiation between states.
+/// 
+/// It is useful when you’re filtering out irrelevant messages in pipelines that deal with networking.
 /// 
 #[derive(Default, PartialEq, Eq, PartialOrd, Ord, Clone, Copy, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct VariableStateNumber
 {
 
-    variable_state_number: u32
+    value: u32
 
 }
 
@@ -29,26 +31,35 @@ impl VariableStateNumber
     pub fn new() -> Self
     {
 
-        Self::default()
+        Self
+        {
+
+            value: 0
+
+        }
 
     }
 
-    impl_val_getter!(variable_state_number, u32, "Gets the current number value.");
+    impl_val_getter!(value, u32, "Gets the current number value.");
 
-    //impl_get_val!(id_number, u32, "Gets the current id number value.");
-
+    ///
+    /// Increment the value in-place and return a copy.
+    /// 
     pub fn next(&mut self) -> Self
     {
 
        Self
        {
        
-            variable_state_number: self.variable_state_number.wpp()
+            value: self.value.wpp()
 
        }
 
     }
 
+    ///
+    /// Instantiate a new VariableStateMessage instance with the current VariableStateNumber value.
+    /// 
     pub fn variable_state_message<T>(&self, message: T) -> VariableStateMessage<T>
     {
 
@@ -64,7 +75,7 @@ impl Display for VariableStateNumber
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result
     {
 
-        write!(f, "{}", self.variable_state_number)
+        write!(f, "{}", self.value)
        
     }
 

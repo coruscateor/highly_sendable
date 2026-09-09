@@ -1,5 +1,3 @@
-use corlib::collections::Queue;
-
 use delegate::delegate;
 
 use super::{SendableText, SendableTextLog};

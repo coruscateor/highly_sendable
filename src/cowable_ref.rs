@@ -5,7 +5,7 @@ use std::fmt::Debug;
 use crate::SendableRef;
 
 #[cfg(feature = "serde")]
-use serde::{de::{Error, Visitor, EnumAccess}, Deserialize, Deserializer, Serialize, Serializer};
+use serde::{de::{Visitor, EnumAccess}, Deserialize, Deserializer, Serialize, Serializer};
 
 #[derive(Clone)]
 pub enum CowableRef<'a, T>
@@ -64,6 +64,24 @@ impl<'a, T> CowableRef<'a, T>
 
             CowableRef::SendableRef(sendable_ref) => sendable_ref.get_mut(),
             CowableRef::Cow(cow) => Some(cow.to_mut())
+            
+        }
+
+    }
+
+    pub fn clone_if_not_box(&'a self) -> Option<CowableRef<'a, T>>
+    {
+
+        if self.is_sendable_ref_box()
+        {
+
+            None
+
+        }
+        else
+        {
+
+            Some(self.clone())
             
         }
 
