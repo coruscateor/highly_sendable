@@ -23,11 +23,23 @@ Sendable objects that can assist with communicating progress and status within y
 
 ## Valid Features
 
-| Feature                   | Description                           |
-| -------                   | -----------                           |
+| Feature                   | Description                        |
+| -------                   | -----------                        |
 | serde                     | Enables serde dependant features.  |
 | corlib                    | Enables corlib dependant features. |
 | bytes                     | Enables bytes dependant features.  |
+
+<br />
+
+## AI Contribution Policy
+
+No direct contributions from any AI system, generative or otherwise are allowed. No contributions with AI co-authors listed in the Cargo file or elsewhere will be accepted.
+
+Potential contributors may make submissions which were created, whole or in-part, with AI tools as long as the author or authors, understands exactly what the submission does (in the case of a submission that includes code), how the submission works (again, in the case of a submission that includes code) and how it contributes to the project and the meaning of all the parts, components, text etc of the submission.
+
+Submissions that include AI generated code must also include passing tests.
+
+The maintainer or maintainers of the project and any sub-projects reserve the right to reject submissions made by potential and past contributors for any reason, including no reason.
 
 <br />
 
@@ -37,6 +49,8 @@ Sendable objects that can assist with communicating progress and status within y
 - Add code examples
 - Clean-up the code
 
+<br />
+
 ## Coding Style
 
 This project uses a coding style that emphasises the use of white space over keeping the line and column counts as low as possible.
@@ -45,7 +59,9 @@ So this:
 
 ```rust
 
-fn bar() {} 
+fn bar()
+{
+} 
 
 fn foo()
 {
@@ -60,7 +76,7 @@ Not this:
 
 ```rust
 
-fn bar() {} 
+fn bar(){} 
 
 fn foo()
 {
