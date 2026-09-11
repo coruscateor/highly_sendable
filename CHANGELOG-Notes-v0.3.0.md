@@ -144,7 +144,7 @@ Date:   Wed Jul 29 12:57:19 2026 +1200
     
     - Added the VariableStateNumber struct.
 
-commit bb127f243527c9d8b24e1b622c8246e5040b2707
+commit bb127f243527c9d8b24e1b622c8246e5040b2707 -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Fri Jul 24 19:07:44 2026 +1200
 
@@ -158,7 +158,7 @@ Date:   Fri Jul 24 19:07:44 2026 +1200
     
     - Removed the text::SendableTextImmut enum.
 
-commit 01bee7bb399bca6d6b0fd1a432d7f02a1945da76
+commit 01bee7bb399bca6d6b0fd1a432d7f02a1945da76 -
 Author: Paul Saunders <coruscateor@users.noreply.github.com>
 Date:   Thu Jul 23 19:31:02 2026 +1200
 

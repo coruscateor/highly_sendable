@@ -59,6 +59,24 @@ commit 404f0f90797cc818f71e731eb61d0a42cf492439
     
 - Added the VariableStateNumber struct.
 
+commit bb127f243527c9d8b24e1b622c8246e5040b2707
+
+-- Added string, str and arc_str methods to the SendableBytes enum.
+
+Added in this version.
+
+- Conditionally added the SendableBytesVisitor struct.
+
+commit 01bee7bb399bca6d6b0fd1a432d7f02a1945da76
+
+- Added the bytes crate as an optional dependency.
+    
+- Added the SendableBytes enum.
+
+e299294e913b09f6623291293343ada57d3e2021
+
+- Added an “AI Contribution Policy” section  to the readme.
+
 
 
 ### Changed
@@ -91,7 +109,7 @@ commit 89ec0f214e8af1a1a8185ae69b47956da8db33d0
 
 Added in this version.
 
-- Other minor changes.
+-- Other minor changes.
 
 commit c7ecb31521426336688f3fa839687f39e5065340
 
@@ -151,7 +169,9 @@ commit 40b19e23662db6a80b07c4c104d56e4f37838b9d
 
 Added in this version.
 
--- Other minor changes.
+- Other minor changes.
+
+Put last
 
 commit 29925f714300f8e3eb3a82f7bf0e99b4bbf92f3c
 
@@ -167,6 +187,19 @@ commit 404f0f90797cc818f71e731eb61d0a42cf492439
 
 - Disabled the ConnectionMessage struct.
 
+commit bb127f243527c9d8b24e1b622c8246e5040b2707
+
+-- Replaced the accessorise dependency with a local repository and updated the project accordingly.
+
+-- Conditionally implemented the serde Serialize and Deserialize traits for the SendableBytes enum.
+
+Added in this version.
+
+commit 01bee7bb399bca6d6b0fd1a432d7f02a1945da76
+
+- Updated the Corlib dependency to version 0.5.0.
+
+
 
 
 ### Deprecated
@@ -174,6 +207,10 @@ commit 404f0f90797cc818f71e731eb61d0a42cf492439
 
 
 ### Removed
+
+commit bb127f243527c9d8b24e1b622c8246e5040b2707
+
+- Removed the text::SendableTextImmut enum.
 
 
 
