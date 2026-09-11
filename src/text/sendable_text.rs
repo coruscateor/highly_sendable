@@ -135,7 +135,7 @@ impl SendableText
 
     }
 
-    pub fn clone_if_not_string(&self) -> Option<SendableText>
+    pub fn clone_if_not_string(&self) -> Option<Self>
     {
 
         match self

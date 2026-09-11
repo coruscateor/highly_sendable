@@ -24,21 +24,21 @@ pub enum SendableBytes
 impl SendableBytes
 {
 
-    pub fn string(val: String) -> SendableBytes
+    pub fn string(val: String) -> Self
     {
 
         Self::SendableText(SendableText::String(val))
 
     }
 
-    pub fn str(val: &'static str) -> SendableBytes
+    pub fn str(val: &'static str) -> Self
     {
 
         Self::SendableText(SendableText::Str(val))
 
     }
 
-    pub fn arc_str(val: Arc<str>) -> SendableBytes
+    pub fn arc_str(val: Arc<str>) -> Self
     {
 
         Self::SendableText(SendableText::ArcStr(val))
@@ -174,7 +174,7 @@ impl SendableBytes
 
     }
 
-    pub fn clone_if_not_vec_or_string(&self) -> Option<SendableBytes>
+    pub fn clone_if_not_vec_or_string(&self) -> Option<Self>
     {
 
         match self
